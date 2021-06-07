@@ -1,15 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1 class="title">Test</h1>
+  <ListConstructor />
+  <ListView />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ListConstructor from './components/ListConstructor.vue'
+import ListView from "./components/ListView.vue";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ListConstructor, ListView
   }
 }
 </script>
@@ -21,6 +23,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 30px 20px;
+
+  height: calc(100vh - 94px);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20px 1fr;
+  grid-template-areas: 'title title'
+                       'constructor view';
+  grid-column-gap: 80px;
+  grid-row-gap: 80px;
+}
+
+.title {
+  grid-area: title;
 }
 </style>
