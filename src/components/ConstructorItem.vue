@@ -43,7 +43,7 @@
         value="yes"
         :checked="isChecked"
       />
-      <label class="constructor__title" for="list">List 1</label>
+      <label class="constructor__title" for="list">{{ list.name }}</label>
     </div>
     <transition name="fade">
       <div v-if="show" class="constructor__checkboxes">
@@ -55,9 +55,11 @@
 
           <input type="color" id="item1-color" />
         </div>
-        <div>
-          <input type="checkbox" id="item2" name="item" />
-          <label for="item2">item 2</label>
+        <div class="constructor__checkbox">
+          <input type="checkbox" id="item1" name="item" />
+          <label for="item1">item 1</label>
+          <input type="number" min="0" max="100" />
+          <input type="color" id="item1-color" />
         </div>
       </div>
     </transition>
@@ -66,6 +68,9 @@
 
 <script>
 export default {
+  props: {
+    list: Object,
+  },
   data() {
     return {
       show: true,
@@ -113,6 +118,7 @@ export default {
 
 .constructor__block {
   display: flex;
+  align-items: center;
 }
 
 .constructor__arrow {
@@ -134,7 +140,7 @@ export default {
 }
 
 .constructor__checkboxes {
-  padding: 0 80px;
+  padding: 0 40px;
 }
 
 .constructor__checkbox {

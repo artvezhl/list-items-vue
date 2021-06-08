@@ -1,7 +1,6 @@
 <template>
   <section class="constructor">
-    <ConstructorItem />
-    {{ lists }}
+    <ConstructorItem v-for="list in lists" :key="list.id" :list="list" />
   </section>
 </template>
 
@@ -11,7 +10,9 @@ export default {
   components: {
     ConstructorItem,
   },
-  props: ["lists"],
+  props: {
+    lists: Array,
+  },
 };
 </script>
 

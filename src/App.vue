@@ -1,7 +1,9 @@
 <template>
-  <h1 class="title">Test</h1>
-  <ListConstructor :data="lists" />
-  <ListView />
+  <main class="main">
+    <h1 class="title">Test</h1>
+    <ListConstructor :lists="allLists" />
+    <ListView :lists="allLists" />
+  </main>
 </template>
 
 <script>
@@ -14,101 +16,16 @@ export default {
     ListConstructor,
     ListView,
   },
-  data() {
-    return {
-      lists: [
-        {
-          id: 1,
-          name: "List 1",
-          isChecked: false,
-          items: [
-            {
-              id: 11,
-              name: "item 1",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 12,
-              name: "item 2",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 13,
-              name: "item 3",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-          ],
-        },
-        {
-          id: 2,
-          name: "List 2",
-          isChecked: false,
-          items: [
-            {
-              id: 21,
-              name: "item 1",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 22,
-              name: "item 2",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 23,
-              name: "item 3",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: "List 3",
-          isChecked: false,
-          items: [
-            {
-              id: 31,
-              name: "item 1",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 32,
-              name: "item 2",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-            {
-              id: 33,
-              name: "item 3",
-              isChecked: false,
-              value: 0,
-              color: "red",
-            },
-          ],
-        },
-      ],
-    };
+  computed: {
+    allLists() {
+      return this.$store.getters.getLists;
+    },
   },
 };
 </script>
 
 <style>
-#app {
+.main {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
