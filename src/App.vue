@@ -1,14 +1,15 @@
 <template>
   <main class="main">
     <h1 class="title">Test</h1>
-    <ListConstructor :lists="allLists" />
-    <ListView :lists="allLists" />
+    <ListConstructor :lists="getLists" />
+    <ListView :lists="getLists" />
   </main>
 </template>
 
 <script>
 import ListConstructor from "./components/ListConstructor.vue";
 import ListView from "./components/ListView.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -16,11 +17,8 @@ export default {
     ListConstructor,
     ListView,
   },
-  computed: {
-    allLists() {
-      return this.$store.getters.getLists;
-    },
-  },
+  computed: mapGetters(["getLists"]),
+  // methods: mapMutations(["setCountValue"]),
 };
 </script>
 

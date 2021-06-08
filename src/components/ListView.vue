@@ -1,6 +1,6 @@
 <template>
   <section class="view">
-    <ListViewItem v-for="list in lists" :key="list.id" :list="list" />
+    <list-view-item v-for="list in lists" :key="list.id" :list="list" />
   </section>
 </template>
 
@@ -10,7 +10,7 @@ import ListViewItem from "./ListViewItem";
 export default {
   name: "ListView",
   components: {
-    ListViewItem,
+    "list-view-item": ListViewItem,
   },
   props: {
     lists: Array,

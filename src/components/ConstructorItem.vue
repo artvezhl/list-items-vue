@@ -38,8 +38,8 @@
       </button>
       <input
         type="checkbox"
-        id="list"
-        name="list"
+        :id="list.name"
+        :name="list.name"
         value="yes"
         :checked="isChecked"
       />
@@ -47,27 +47,41 @@
     </div>
     <transition name="fade">
       <div v-if="show" class="constructor__checkboxes">
-        <div class="constructor__checkbox">
-          <input type="checkbox" id="item1" name="item" />
-          <label for="item1">item 1</label>
+        <constructor-list-item
+          v-for="item in list.items"
+          :key="item.id"
+          :item="item"
+        />
+        <!-- <div
+          class="constructor__checkbox"
+          v-for="item in list.items"
+          :key="item.id"
+        >
+          <input
+            type="checkbox"
+            :id="item.name"
+            :name="item.name"
+            v-model="item.isChecked"
+          />
+          <label :for="item.name">{{ item.name }}</label>
 
-          <input type="number" min="0" max="100" />
+          <input type="number" min="0" max="100" v-model="item.value" />
 
-          <input type="color" id="item1-color" />
-        </div>
-        <div class="constructor__checkbox">
-          <input type="checkbox" id="item1" name="item" />
-          <label for="item1">item 1</label>
-          <input type="number" min="0" max="100" />
-          <input type="color" id="item1-color" />
-        </div>
+          <input type="color" :id="item.name + '-color'" v-model="item.color" />
+        </div> -->
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import ConstructorListItem from "./ConstructorListItem";
+
 export default {
+  components: {
+    "constructor-list-item": ConstructorListItem,
+  },
   props: {
     list: Object,
   },
@@ -77,6 +91,8 @@ export default {
       isChecked: true,
     };
   },
+  methods: mapMutations(["setCountValue"]),
+  //   setCountValue(item.id, item.value),
 };
 </script>
 
@@ -141,11 +157,6 @@ export default {
 
 .constructor__checkboxes {
   padding: 0 40px;
-}
-
-.constructor__checkbox {
-  display: flex;
-  justify-content: space-between;
 }
 
 .fade-enter-active,

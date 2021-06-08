@@ -16,21 +16,21 @@ export default new Vuex.Store({
             name: "item 1",
             isChecked: false,
             value: 80,
-            color: "red"
+            color: "#FF0000"
           },
           {
             id: 12,
             name: "item 2",
             isChecked: false,
             value: 50,
-            color: "yellow"
+            color: "#FFFF00"
           },
           {
             id: 13,
             name: "item 3",
             isChecked: false,
             value: 30,
-            color: "green"
+            color: "#008000"
           }
         ]
       },
@@ -44,21 +44,21 @@ export default new Vuex.Store({
             name: "item 1",
             isChecked: false,
             value: 80,
-            color: "red"
+            color: "#FF0000"
           },
           {
             id: 22,
             name: "item 2",
             isChecked: false,
             value: 50,
-            color: "yellow"
+            color: "#FFFF00"
           },
           {
             id: 23,
             name: "item 3",
             isChecked: false,
             value: 30,
-            color: "green"
+            color: "#008000"
           }
         ]
       },
@@ -72,25 +72,40 @@ export default new Vuex.Store({
             name: "item 1",
             isChecked: false,
             value: 80,
-            color: "red"
+            color: "#FF0000"
           },
           {
             id: 32,
             name: "item 2",
             isChecked: false,
             value: 50,
-            color: "yellow"
+            color: "#FFFF00"
           },
           {
             id: 33,
             name: "item 3",
             isChecked: false,
             value: 30,
-            color: "green"
+            color: "#008000"
           }
         ]
       }
     ]
+  },
+  mutations: {
+    setCurrentItem(state, newItem) {
+      let currentItem = {};
+      for (let list of state.lists) {
+        const result = list.items.find((item) => item.id === newItem.id);
+        if (result) currentItem = result;
+      }
+      state.lists.forEach((list) => {
+        list.items.find((item) => item.id === newItem.id);
+      });
+      console.log(newItem);
+      console.log(currentItem);
+      currentItem = { ...newItem };
+    }
   },
   getters: {
     getLists(store) {
