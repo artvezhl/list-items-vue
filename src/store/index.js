@@ -40,26 +40,17 @@ export default new Vuex.Store({
           if (list.items[i].id === newItem.id) {
             listId = id;
             itemsId = i;
+            newLists[listId].items[itemsId] = { ...newItem };
+            state.lists = JSON.parse(JSON.stringify(newLists));
           }
         }
-        newLists[listId].items[itemsId] = { ...newItem };
-        console.log(newLists);
-        state.lists = JSON.parse(JSON.stringify(newLists));
-      });
-
-      let currentItem = {};
-      for (let list of state.lists) {
-        const result = list.items.find((item) => item.id === newItem.id);
-        if (result) currentItem = result;
-      }
-      state.lists.forEach((list) => {
-        list.items.find((item) => item.id === newItem.id);
       });
     }
   },
   getters: {
     getLists(store) {
       return store.lists;
-    }
+    },
+
   }
 });

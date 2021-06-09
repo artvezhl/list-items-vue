@@ -7,12 +7,10 @@
     <div
       class="view__items"
       v-for="item in list.items"
-      :key="Math.floor(Math.random() * Date.now())"
+      :key="item.id"
+      v-if="item.isChecked"
     >
-      {{ item.value }}
-      <div v-for="i in item.value" :key="i.id">
-        <div class="view__item" :style="{ background: item.color }"></div>
-      </div>
+      <div v-for="i in item.value" :key="i.id" class="view__item" :style="{ background: item.color }"></div>
     </div>
   </div>
 </template>
@@ -22,11 +20,6 @@ export default {
   name: "ListViewItem",
   props: {
     list: Object,
-  },
-  data() {
-    return {
-      index: 0,
-    };
   },
 };
 </script>

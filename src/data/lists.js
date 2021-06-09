@@ -2,7 +2,7 @@ const lists = [
     {
         id: 1,
         name: "List 1",
-        isChecked: false,
+        isChecked: true,
         items: [
             {
                 id: 11,

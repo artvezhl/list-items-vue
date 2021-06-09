@@ -3,8 +3,8 @@
     <div class="constructor__block">
       <button
         class="constructor__arrow"
-        :class="{ constructor__list_isOpen: show }"
-        @click="show = !show"
+        :class="{ constructor__list_isOpen: list.isChecked }"
+        @click="list.isChecked = !list.isChecked"
       >
         <svg
           width="15.000000000000002"
@@ -40,13 +40,13 @@
         type="checkbox"
         :id="list.name"
         :name="list.name"
-        value="yes"
-        :checked="isChecked"
+        :checked="list.isChecked"
+        v-model="list.isChecked"
       />
-      <label class="constructor__title" for="list">{{ list.name }}</label>
+      <label class="constructor__title">{{ list.name }}</label>
     </div>
     <transition name="fade">
-      <div v-if="show" class="constructor__checkboxes">
+      <div v-if="list.isChecked" class="constructor__checkboxes">
         <constructor-list-item
           v-for="item in list.items"
           :key="item.id"

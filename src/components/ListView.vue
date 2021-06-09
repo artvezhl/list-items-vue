@@ -1,6 +1,6 @@
 <template>
   <section class="view">
-    <list-view-item v-for="list in lists" :key="list.id" :list="list" />
+    <ListViewItem v-if="list.isChecked" v-for="list in lists" :key="list.id" :list="list" />
   </section>
 </template>
 
@@ -10,7 +10,7 @@ import ListViewItem from "./ListViewItem";
 export default {
   name: "ListView",
   components: {
-    "list-view-item": ListViewItem,
+    ListViewItem,
   },
   props: {
     lists: Array,
