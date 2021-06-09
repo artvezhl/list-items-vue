@@ -1,11 +1,21 @@
 <template>
-  <div class="view"></div>
+  <section class="view">
+    <ListViewItem v-if="list.isChecked" v-for="list in lists" :key="list.id" :list="list" />
+  </section>
 </template>
 
 <script>
+import ListViewItem from "./ListViewItem";
+
 export default {
-  name: "ListView"
-}
+  name: "ListView",
+  components: {
+    ListViewItem,
+  },
+  props: {
+    lists: Array,
+  },
+};
 </script>
 
 <style scoped>

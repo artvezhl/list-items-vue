@@ -1,23 +1,38 @@
 <template>
-  <h1 class="title">Test</h1>
-  <ListConstructor />
-  <ListView />
+  <main class="main">
+    <h1 class="title">Test</h1>
+    <ListConstructor :lists="lists" />
+    <ListView :lists="lists" />
+  </main>
 </template>
 
 <script>
-import ListConstructor from './components/ListConstructor.vue'
+import ListConstructor from "./components/ListConstructor.vue";
 import ListView from "./components/ListView.vue";
+import { mapActions } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    ListConstructor, ListView
-  }
-}
+    ListConstructor,
+    ListView,
+  },
+  methods: {
+    ...mapActions(["collectLists"]),
+  },
+  created() {
+    this.collectLists();
+  },
+  computed: {
+    lists() {
+      return this.$store.state.lists;
+    },
+  },
+};
 </script>
 
 <style>
-#app {
+.main {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,8 +45,9 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 20px 1fr;
-  grid-template-areas: 'title title'
-                       'constructor view';
+  grid-template-areas:
+    "title title"
+    "constructor view";
   grid-column-gap: 80px;
   grid-row-gap: 80px;
 }
