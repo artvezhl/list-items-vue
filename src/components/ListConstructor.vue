@@ -10,8 +10,13 @@ export default {
   components: {
     "constructor-item": ConstructorItem,
   },
-  props: {
-    lists: Array,
+  // props: {
+  //   lists: Array,
+  // },
+  computed: {
+    lists() {
+      return this.$store.state.lists;
+    },
   },
 };
 </script>

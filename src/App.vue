@@ -1,15 +1,15 @@
 <template>
   <main class="main">
     <h1 class="title">Test</h1>
-    <ListConstructor :lists="getLists" />
-    <ListView :lists="getLists" />
+    <ListConstructor :lists="lists" />
+    <ListView :lists="lists" />
   </main>
 </template>
 
 <script>
 import ListConstructor from "./components/ListConstructor.vue";
 import ListView from "./components/ListView.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -18,12 +18,16 @@ export default {
     ListView,
   },
   methods: {
-    ...mapActions(['collectLists', 'changeAsync']),
+    ...mapActions(["collectLists"]),
   },
   created() {
     this.collectLists();
   },
-  computed: mapGetters(["getLists"]),
+  computed: {
+    lists() {
+      return this.$store.state.lists;
+    },
+  },
 };
 </script>
 

@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import ConstructorListItem from "./ConstructorListItem";
 
 export default {
@@ -74,7 +73,6 @@ export default {
       isChecked: true,
     };
   },
-  methods: mapMutations(["updateLists"]),
 };
 </script>
 
