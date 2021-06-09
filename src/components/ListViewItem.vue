@@ -4,7 +4,7 @@
       <p class="view__list-title">{{ list.name }}</p>
       <button class="view__button">Перемешать</button>
     </div>
-    <div class="view__items" v-for="item in list.items" :key="item.id">
+    <div class="view__items" v-for="item in list.items" :key="Math.floor(Math.random() * Date.now())">
       <div v-for="i in item.value" :key="i.id">
         <div class="view__item" :style="{ background: item.color }"></div>
       </div>
@@ -18,6 +18,11 @@ export default {
   props: {
     list: Object,
   },
+  data() {
+    return {
+      index: 0,
+    }
+  }
 };
 </script>
 

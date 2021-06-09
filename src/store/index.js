@@ -1,99 +1,54 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import { lists } from '../data/lists'
+
 Vue.use(Vuex);
+
+const loadLists = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(lists)
+    }, 1000)
+  })
+}
 
 export default new Vuex.Store({
   state: {
-    lists: [
-      {
-        id: 1,
-        name: "List 1",
-        isChecked: false,
-        items: [
-          {
-            id: 11,
-            name: "item 1",
-            isChecked: false,
-            value: 80,
-            color: "#FF0000"
-          },
-          {
-            id: 12,
-            name: "item 2",
-            isChecked: false,
-            value: 50,
-            color: "#FFFF00"
-          },
-          {
-            id: 13,
-            name: "item 3",
-            isChecked: false,
-            value: 30,
-            color: "#008000"
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: "List 2",
-        isChecked: false,
-        items: [
-          {
-            id: 21,
-            name: "item 1",
-            isChecked: false,
-            value: 80,
-            color: "#FF0000"
-          },
-          {
-            id: 22,
-            name: "item 2",
-            isChecked: false,
-            value: 50,
-            color: "#FFFF00"
-          },
-          {
-            id: 23,
-            name: "item 3",
-            isChecked: false,
-            value: 30,
-            color: "#008000"
-          }
-        ]
-      },
-      {
-        id: 3,
-        name: "List 3",
-        isChecked: false,
-        items: [
-          {
-            id: 31,
-            name: "item 1",
-            isChecked: false,
-            value: 80,
-            color: "#FF0000"
-          },
-          {
-            id: 32,
-            name: "item 2",
-            isChecked: false,
-            value: 50,
-            color: "#FFFF00"
-          },
-          {
-            id: 33,
-            name: "item 3",
-            isChecked: false,
-            value: 30,
-            color: "#008000"
-          }
-        ]
+    lists: [],
+  },
+  actions: {
+    async collectLists({ commit }) {
+      try {
+        const lists = await loadLists();
+        commit('SET_LISTS', lists);
+      } catch(e) {
+        console.error(e);
       }
-    ]
+    },
+    changeAsync ({ commit }) {
+      setTimeout(() => {
+        commit('UPDATE_LISTS')
+      }, 1000)
+    }
   },
   mutations: {
-    setCurrentItem(state, newItem) {
+    SET_LISTS(state, lists) {
+      state.lists = lists;
+    },
+    UPDATE_LISTS(state, newItem) {
+      state.lists.map((list, id) => {
+        let listId = 0;
+        let itemsId = 0;
+        for (let i = 0; i < list.items.length; i++) {
+          if (list.items[i].id === newItem.id) {
+            listId = id;
+            itemsId = i;
+          }
+          state.lists[listId].items[itemsId] = { ...newItem };
+        }
+      })
+
       let currentItem = {};
       for (let list of state.lists) {
         const result = list.items.find((item) => item.id === newItem.id);
@@ -104,7 +59,6 @@ export default new Vuex.Store({
       });
       console.log(newItem);
       console.log(currentItem);
-      currentItem = { ...newItem };
     }
   },
   getters: {

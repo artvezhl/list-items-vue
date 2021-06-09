@@ -52,23 +52,6 @@
           :key="item.id"
           :item="item"
         />
-        <!-- <div
-          class="constructor__checkbox"
-          v-for="item in list.items"
-          :key="item.id"
-        >
-          <input
-            type="checkbox"
-            :id="item.name"
-            :name="item.name"
-            v-model="item.isChecked"
-          />
-          <label :for="item.name">{{ item.name }}</label>
-
-          <input type="number" min="0" max="100" v-model="item.value" />
-
-          <input type="color" :id="item.name + '-color'" v-model="item.color" />
-        </div> -->
       </div>
     </transition>
   </div>
@@ -91,8 +74,7 @@ export default {
       isChecked: true,
     };
   },
-  methods: mapMutations(["setCountValue"]),
-  //   setCountValue(item.id, item.value),
+  methods: mapMutations(["updateLists"]),
 };
 </script>
 

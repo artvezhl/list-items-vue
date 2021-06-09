@@ -9,7 +9,7 @@
 <script>
 import ListConstructor from "./components/ListConstructor.vue";
 import ListView from "./components/ListView.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -17,8 +17,13 @@ export default {
     ListConstructor,
     ListView,
   },
+  methods: {
+    ...mapActions(['collectLists', 'changeAsync']),
+  },
+  created() {
+    this.collectLists();
+  },
   computed: mapGetters(["getLists"]),
-  // methods: mapMutations(["setCountValue"]),
 };
 </script>
 

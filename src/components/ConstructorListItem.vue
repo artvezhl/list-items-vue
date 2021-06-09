@@ -45,9 +45,11 @@ export default {
     item: Object,
   },
   methods: {
-    ...mapMutations(["setCurrentItem"]),
+    ...mapMutations({
+      updateLists: "UPDATE_LISTS",
+    }),
     submit() {
-      this.setCurrentItem({
+      this.updateLists({
         ...this.currentItem,
         value: Number(this.currentItem.value),
       });
